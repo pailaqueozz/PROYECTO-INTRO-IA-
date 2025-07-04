@@ -187,15 +187,15 @@ Se eligió el algoritmo Naive Bayes, en particular el clasificador de tipo multi
 ✅ Basado en el Teorema de Bayes, estima la probabilidad de cada clase asumiendo independencia entre los atributos, lo cual, aunque simplifica la realidad, suele ser suficiente para obtener buenos resultados.<br>
 ✅ Tiene buen desempeño incluso con datasets de tamaño medio como este.
 
-### Limitaciones:
+## Limitaciones:
 
-• La suposición de independencia condicional entre atributos puede no cumplirse en su totalidad.<br>
+• Todos los atributos son categóricos, lo que limita el uso directo de modelos que requieren datos numéricos. Aunque pueden        codificarse, esta transformación puede introducir ruido, especialmente si se utiliza una codificación ordinal para variables sin orden implícito.<br>
 
-• Puede ser superado por modelos más complejos en problemas de alta no linealidad.<br>
+• Algunos atributos (por ejemplo, odor) tienen una fuerte correlación con la clase, mientras que otros pueden ser redundantes o incluso irrelevantes, afectando negativamente a algunos modelos si no se realiza una selección adecuada de variables.<br>
 
-• No obstante, para este proyecto se prioriza la simplicidad, interpretabilidad y rapidez, siendo Naive Bayes una opción ideal.
+• Los modelos clasificadores solo identifican correlaciones estadísticas. No pueden determinar si un atributo como “odor” causa que un hongo sea venenoso, solo que hay asociación.
 
-🛠️ Metodología aplicada<br>
+## 🛠️ Metodología aplicada<br>
 ## Carga y Exploración de Datos (EDA)
 
 • Revisión de la distribución de clases (edible vs poisonous).
