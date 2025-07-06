@@ -234,6 +234,75 @@ Se eligió el algoritmo Naive Bayes, en particular el clasificador de tipo multi
 
 • Comparación de métricas entre entrenamiento y prueba.
 
+## 📊 Resultados y Conclusiones
+
+### Métricas del Modelo Naive Bayes
+
+Después de entrenar y evaluar el modelo CategoricalNB en el dataset elegido, se obtuvieron los siguientes resultados:
+
+#### **Datos del Dataset:**
+- **Tamaño total:** 8,124 hongos con 23 características
+- **Distribución de clases:** 
+  - Comestibles (e): 4,208 (51.8%)
+  - Venenosos (p): 3,916 (48.2%)
+- **División:** 80% entrenamiento (6,499) / 20% prueba (1,625)
+
+#### **Rendimiento del Modelo:**
+**Precisión Global:** 95.08%
+
+**Métricas por Clase:**
+- **Hongos Comestibles (Clase 0):**
+  - Precisión: 92%
+  - Recall: 99%
+  - F1-score: 95%
+
+- **Hongos Venenosos (Clase 1):**
+  - Precisión: 99%
+  - Recall: 91%
+  - F1-score: 95%
+
+**Validación Cruzada (5-fold):**
+- **Precisión promedio:** 95.27%
+- **Desviación estándar:** 0.66%
+- **Rango de precisión:** 94.09% - 95.88%
+
+#### **Análisis de la Matriz de Confusión:**
+
+| Real/Predicción | Edible | Poisonous |
+|-----------------|--------|-----------|
+| **Edible**      | 837    | 6         |
+| **Poisonous**   | 74     | 708       |
+
+- **Verdaderos Positivos (Edible):** 837
+- **Falsos Negativos (Edible clasificado como Poisonous):** 6 
+- **Falsos Positivos (Poisonous clasificado como Edible):** 74 
+- **Verdaderos Negativos (Poisonous):** 708
+
+### 🎉 Conclusiones Principales
+
+#### **Fortalezas del Modelo:**
+
+1. **Excelente Rendimiento General:** Con un 95.27% de precisión promedio en validación cruzada, el modelo demuestra una capacidad sobresaliente para clasificar hongos.
+
+2. **Consistencia Robusta:** La baja desviación estándar (0.66%) indica que el modelo es estable y confiable entre diferentes subconjuntos de datos.
+
+3. **Alta Sensibilidad para Hongos Comestibles:** El recall del 99% para hongos comestibles minimiza el riesgo de clasificar incorrectamente un hongo comestible como venenoso.
+
+4. **Precisión Excepcional para Hongos Venenosos:** El 99% de precisión para hongos venenosos significa que cuando el modelo predice "venenoso", es casi siempre correcto.
+
+#### **Consideraciones Críticas:**
+
+**Falsos Negativos (6 casos):** Hongos comestibles clasificados como venenosos. Esto es relativamente seguro, aunque puede llevar a desperdiciar hongos comestibles.
+
+**Falsos Positivos (74 casos):** Hongos venenosos clasificados como comestibles. **Este es el error más peligroso** en este contexto, ya que podría llevar a intoxicaciones.
+
+### Conclusión Final
+
+El modelo CategoricalNB logró una precisión excepcional del **95.27%** en la clasificación de hongos comestibles vs venenosos, validando la efectividad del algoritmo Naive Bayes para problemas de clasificación con variables categóricas. 
+
+Sin embargo, dada la naturaleza crítica de la aplicación (donde un error puede tener consecuencias graves para la salud), se enfatiza que **este modelo debe ser utilizado únicamente como herramienta de apoyo** para especialistas, nunca como sustituto del conocimiento experto humano.
+
+El proyecto demuestra exitosamente cómo los algoritmos de ML pueden contribuir significativamente a problemas de clasificación, entregando una base sólida para futuros proyectos.
 
 ## 📂 Estructura del repositorio
 
