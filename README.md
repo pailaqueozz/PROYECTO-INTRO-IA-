@@ -1,15 +1,14 @@
-# 🍄 Clasificación de Hongos: Predicción de Comestibilidad con Naive Bayes
-## 🔍 Descripción del problema
-El consumo de hongos silvestres puede representar un riesgo para la salud si no se identifican correctamente las especies venenosas. Este proyecto busca desarrollar un modelo de clasificación automática que permita predecir si un hongo es comestible o venenoso, basándose en sus características morfológicas.
+#  Clasificación de Hongos: Predicción de Comestibilidad con Naive Bayes
 
-El objetivo es implementar un clasificador de Naive Bayes que, a partir de atributos como color, forma, tamaño y otras propiedades observables, determine la comestibilidad de un hongo.
+## **Descripción del problema**
+Los hongos en general son poco intuitivos de reconocer y clasificar, por lo que una clasificación manual podría generar errores y terminar en intoxicaciones. En este proyecto abordamos la oportunidad de crear una clasificación con Naive Bayes automática. Proponemos un modelo predictivo que, utilizando atributos descriptivos de los hongos, clasifique cada espécimen como comestible o venenoso.
 
-## 🗂️ Descripción del dataset
-*Nombre: Mushroom Edibility Classification*
+## **Descripción del dataset**
+El análisis se basa en el conjunto de datos "Mushroom Edibility Classification", obtenido de la plataforma Kaggle. En este dataset encontramos datos descriptivos de distintos hongos como lo son, características físicas, textura, sombrero, color, etc.
 
-Fuente: Kaggle - Mushroom Classification Dataset
+## **Significado de las columnas del Dataset**
+El dataset consta de una variable objetivo y múltiples atributos descriptivos, todos ellos de naturaleza categórica. A continuación, se detalla el significado de cada variable y sus posibles valores:
 
-## 🍄 Significado de las columnas del Dataset Mushroom Classification
 
 ### Variable objetivo:
 
@@ -17,7 +16,7 @@ Fuente: Kaggle - Mushroom Classification Dataset
 e = Edible<br>
 p = Poisonous
 
-## Atributos descriptivos:<br>
+### Atributos descriptivos:<br>
 **cap-shape: Forma del sombrero**<br>
 b = bell (campana)<br>
 c = conical (cónico)<br>
@@ -177,25 +176,46 @@ u = urban (urbano)<br>
 w = waste (áreas de desecho)<br>
 d = woods (bosques)
 
-Este dataset es ampliamente utilizado en problemas de clasificación y es ideal para modelos probabilísticos como Naive Bayes debido a su naturaleza categórica.
+## 4. Justificación de los modelos seleccionados
 
-🧩 Justificación del modelo seleccionado
+Se decidió implementar y comparar dos algoritmos de clasificación para evaluar cuál ofrece mejor rendimiento en la clasificación de hongos: **Naive Bayes** y **Random Forest**.
+
+### Naive Bayes (CategoricalNB)
+
 Se eligió el algoritmo Naive Bayes, en particular el clasificador de tipo multinomial, por los siguientes motivos:
 
-✅ Los atributos son categóricos y discretos, lo que se ajusta perfectamente al supuesto de Naive Bayes.<br>
-✅ Es un modelo simple, rápido y efectivo para tareas de clasificación binaria.<br>
-✅ Basado en el Teorema de Bayes, estima la probabilidad de cada clase asumiendo independencia entre los atributos, lo cual, aunque simplifica la realidad, suele ser suficiente para obtener buenos resultados.<br>
-✅ Tiene buen desempeño incluso con datasets de tamaño medio como este.
+Los atributos son categóricos y discretos, lo que se ajusta perfectamente al supuesto de Naive Bayes.<br>
+
+Es un modelo simple, rápido y efectivo para tareas de clasificación binaria.<br>
+
+Basado en el Teorema de Bayes, estima la probabilidad de cada clase asumiendo independencia entre los atributos, lo cual, aunque simplifica la realidad, suele ser suficiente para obtener buenos resultados.<br>
+
+Tiene buen desempeño incluso con datasets de tamaño medio como este.
+
+### Random Forest
+
+La inclusión de Random Forest como segundo modelo se justifica por las siguientes razones:
+
+Es un algoritmo robusto que maneja bien variables categóricas sin necesidad de asunciones de independencia entre características.<br>
+
+Al ser un método de ensemble, combina múltiples árboles de decisión, lo que reduce el riesgo de overfitting y mejora la generalización.<br>
+
+Proporciona información valiosa sobre la importancia de las características, permitiendo identificar qué atributos son más relevantes para la clasificación.<br>
+
+Es menos sensible a outliers y ruido en los datos comparado con modelos más simples.<br>
+
+Su capacidad para capturar interacciones complejas entre variables lo hace especialmente adecuado para problemas donde las relaciones entre características pueden ser no lineales.
+
 
 ## Limitaciones:
 
-• Todos los atributos son categóricos, lo que limita el uso directo de modelos que requieren datos numéricos. Aunque pueden        codificarse, esta transformación puede introducir ruido, especialmente si se utiliza una codificación ordinal para variables sin orden implícito.<br>
+• Todos los atributos son categóricos, lo que limita el uso directo de modelos que requieren datos numéricos. Aunque pueden codificarse, esta transformación puede introducir ruido, especialmente si se utiliza una codificación ordinal para variables sin orden implícito.<br>
 
 • Algunos atributos (por ejemplo, odor) tienen una fuerte correlación con la clase, mientras que otros pueden ser redundantes o incluso irrelevantes, afectando negativamente a algunos modelos si no se realiza una selección adecuada de variables.<br>
 
 • Los modelos clasificadores solo identifican correlaciones estadísticas. No pueden determinar si un atributo como “odor” causa que un hongo sea venenoso, solo que hay asociación.
 
-## 🛠️ Metodología aplicada<br>
+# Metodología aplicada<br>
 ## Carga y Exploración de Datos (EDA)
 
 • Revisión de la distribución de clases (edible vs poisonous).
@@ -210,7 +230,7 @@ Se eligió el algoritmo Naive Bayes, en particular el clasificador de tipo multi
 
 • Revisión de datos faltantes y consistencia.
 
-## División de Datos y Vectorización
+## División de Datos
 
 • Separación en conjuntos de entrenamiento y prueba (ejemplo: 80% - 20%).
 
@@ -218,7 +238,7 @@ Se eligió el algoritmo Naive Bayes, en particular el clasificador de tipo multi
 
 ## Entrenamiento del Modelo
 
-• Implementación de Naive Bayes con CategoricalNB de scikit-learn.
+• Implementación de Naive Bayes con CategoricalNB y Random Forest con RandomForestClassifier de scikit-learn.
 
 ## Evaluación y Visualización de Resultados
 
@@ -234,11 +254,11 @@ Se eligió el algoritmo Naive Bayes, en particular el clasificador de tipo multi
 
 • Comparación de métricas entre entrenamiento y prueba.
 
-## 📊 Resultados y Conclusiones
+## Resultados y Conclusiones
 
-### Métricas del Modelo Naive Bayes
+### Comparación de Modelos: Naive Bayes vs Random Forest
 
-Después de entrenar y evaluar el modelo CategoricalNB en el dataset elegido, se obtuvieron los siguientes resultados:
+Después de entrenar y evaluar ambos modelos en el dataset de hongos, se obtuvieron los siguientes resultados comparativos:
 
 #### **Datos del Dataset:**
 - **Tamaño total:** 8,124 hongos con 23 características
@@ -247,66 +267,78 @@ Después de entrenar y evaluar el modelo CategoricalNB en el dataset elegido, se
   - Venenosos (p): 3,916 (48.2%)
 - **División:** 80% entrenamiento (6,499) / 20% prueba (1,625)
 
-#### **Rendimiento del Modelo:**
-**Precisión Global:** 95.08%
+#### **Rendimiento Comparativo:**
 
-**Métricas por Clase:**
-- **Hongos Comestibles (Clase 0):**
-  - Precisión: 92%
-  - Recall: 99%
-  - F1-score: 95%
+| Métrica | Naive Bayes | Random Forest |
+|---------|-------------|---------------|
+| **Accuracy (Test Set)** | 95.1% | 100.0% |
+| **Accuracy (Validación Cruzada)** | 95.3% | 100.0% |
+| **Desviación Estándar** | 0.7% | 0.0% |
 
-- **Hongos Venenosos (Clase 1):**
-  - Precisión: 99%
-  - Recall: 91%
-  - F1-score: 95%
+#### **Análisis de Errores Críticos:**
 
-**Validación Cruzada (5-fold):**
-- **Precisión promedio:** 95.27%
-- **Desviación estándar:** 0.66%
-- **Rango de precisión:** 94.09% - 95.88%
+| Tipo de Error | Naive Bayes | Random Forest |
+|---------------|-------------|---------------|
+| **Falsos Positivos** | 74 casos | 0 casos |
+| **Falsos Negativos** | 6 casos | 0 casos |
 
-#### **Análisis de la Matriz de Confusión:**
+**Nota:** Los falsos positivos (hongos venenosos clasificados como comestibles) representan el error más crítico en este contexto.
 
-| Real/Predicción | Edible | Poisonous |
-|-----------------|--------|-----------|
-| **Edible**      | 837    | 6         |
-| **Poisonous**   | 74     | 708       |
+#### **Métricas Detalladas por Modelo:**
 
-- **Verdaderos Positivos (Edible):** 837
-- **Falsos Negativos (Edible clasificado como Poisonous):** 6 
-- **Falsos Positivos (Poisonous clasificado como Edible):** 74 
-- **Verdaderos Negativos (Poisonous):** 708
+**Naive Bayes:**
+- **Hongos Comestibles:** Precisión 92%, Recall 99%, F1-score 95%
+- **Hongos Venenosos:** Precisión 99%, Recall 91%, F1-score 95%
 
-### 🎉 Conclusiones Principales
+**Random Forest:**
+- **Hongos Comestibles:** Precisión 100%, Recall 100%, F1-score 100%
+- **Hongos Venenosos:** Precisión 100%, Recall 100%, F1-score 100%
 
-#### **Fortalezas del Modelo:**
+### Conclusiones Principales
 
-1. **Excelente Rendimiento General:** Con un 95.27% de precisión promedio en validación cruzada, el modelo demuestra una capacidad sobresaliente para clasificar hongos.
+#### **Rendimiento Superior de Random Forest:**
 
-2. **Consistencia Robusta:** La baja desviación estándar (0.66%) indica que el modelo es estable y confiable entre diferentes subconjuntos de datos.
+1. **Precisión Perfecta:** Random Forest logró un 100% de precisión tanto en el conjunto de prueba como en validación cruzada, superando significativamente a Naive Bayes.
 
-3. **Alta Sensibilidad para Hongos Comestibles:** El recall del 99% para hongos comestibles minimiza el riesgo de clasificar incorrectamente un hongo comestible como venenoso.
+2. **Eliminación de Errores Críticos:** Random Forest no presentó falsos positivos ni falsos negativos, eliminando completamente el riesgo de clasificar hongos venenosos como comestibles.
 
-4. **Precisión Excepcional para Hongos Venenosos:** El 99% de precisión para hongos venenosos significa que cuando el modelo predice "venenoso", es casi siempre correcto.
+3. **Estabilidad Absoluta:** La desviación estándar de 0.0% en validación cruzada indica consistencia perfecta entre diferentes particiones de datos.
 
-#### **Consideraciones Críticas:**
+#### **Desempeño de Naive Bayes:**
 
-**Falsos Negativos (6 casos):** Hongos comestibles clasificados como venenosos. Esto es relativamente seguro, aunque puede llevar a desperdiciar hongos comestibles.
+1. **Rendimiento Sólido:** Con 95.3% de precisión promedio, Naive Bayes demostró ser un clasificador competente.
 
-**Falsos Positivos (74 casos):** Hongos venenosos clasificados como comestibles. **Este es el error más peligroso** en este contexto, ya que podría llevar a intoxicaciones.
+2. **Errores Controlados:** Aunque presentó 74 falsos positivos, mantuvo un número relativamente bajo considerando el tamaño del dataset.
+
+3. **Eficiencia Computacional:** Ofrece entrenamiento más rápido y menor complejidad computacional.
+
+#### **Consideraciones Prácticas:**
+
+**Recomendación:** Random Forest es el modelo recomendado para esta aplicación debido a su precisión perfecta y eliminación total de errores críticos.
+
+**Ventajas de Random Forest:**
+- Precisión perfecta en la clasificación
+- Eliminación completa de riesgos de seguridad
+- Capacidad de identificar características más importantes
+- Mayor robustez ante variaciones en los datos
+
+**Ventajas de Naive Bayes:**
+- Menor tiempo de entrenamiento
+- Mayor simplicidad e interpretabilidad
+- Menor requerimiento computacional
+- Buen rendimiento general con recursos limitados
 
 ### Conclusión Final
 
-El modelo CategoricalNB logró una precisión excepcional del **95.27%** en la clasificación de hongos comestibles vs venenosos, validando la efectividad del algoritmo Naive Bayes para problemas de clasificación con variables categóricas. 
+El análisis comparativo demuestra la superioridad clara de Random Forest sobre Naive Bayes para la clasificación de hongos comestibles vs venenosos. Con una **precisión perfecta del 100%** y la eliminación total de errores críticos, Random Forest proporciona el nivel de seguridad requerido para una aplicación tan sensible.
 
-Sin embargo, dada la naturaleza crítica de la aplicación (donde un error puede tener consecuencias graves para la salud), se enfatiza que **este modelo debe ser utilizado únicamente como herramienta de apoyo** para especialistas, nunca como sustituto del conocimiento experto humano.
+Aunque Naive Bayes mostró un rendimiento sólido (95.3%), la presencia de 74 falsos positivos representa un riesgo inaceptable en el contexto de seguridad alimentaria. 
 
-El proyecto demuestra exitosamente cómo los algoritmos de ML pueden contribuir significativamente a problemas de clasificación, entregando una base sólida para futuros proyectos.
+**Random Forest se establece como el modelo de elección** para este problema, ofreciendo la confiabilidad necesaria para una herramienta de apoyo en la identificación de hongos, manteniendo siempre la recomendación de que debe complementarse con conocimiento experto humano.
 
-## 📂 Estructura del repositorio
+##  Estructura del repositorio
 
-    📁 PROYECTO-INTRO-IA-/
+     PROYECTO-INTRO-IA-/
     - proyecto_IA.ipynb       # Notebook principal del proyecto 
     - dataset/                        # Carpeta con el dataset
         -mushrooms.csv
